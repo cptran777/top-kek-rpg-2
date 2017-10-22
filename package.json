@@ -4,7 +4,7 @@
   "description": "Use typescript and create react app for restart of top kek rpg",
   "main": "top-kek-rpg-server/index.js",
   "scripts": {
-    "start": "npm run build && npm run watch2",
+    "start": "cd top-kek-rpg-client && npm run build && cd .. && npm run build && npm run watch2",
     "build": "npm run build-ts && npm run tslint",
     "newbuild": "npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets",
     "serve": "nodemon dist/index.js",
