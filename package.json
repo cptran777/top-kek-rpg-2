@@ -76,7 +76,6 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "@types/react-redux": "^5.0.10",
     "async": "^2.5.0",
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
@@ -84,8 +83,6 @@
     "express-session": "^1.15.6",
     "lodash": "^4.17.4",
     "path": "^0.12.7",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
     "request": "^2.83.0"
   }
 }
