@@ -4,10 +4,12 @@
   "description": "Use typescript and create react app for restart of top kek rpg",
   "main": "top-kek-rpg-server/index.js",
   "scripts": {
-    "start": "npm run build && npm run watch",
-    "build": "npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets",
-    "serve": "nodemon top-kek-rpg-server/index.js",
+    "start": "npm run build && npm run watch2",
+    "build": "npm run build-ts && npm run tslint",
+    "newbuild": "npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets",
+    "serve": "nodemon dist/index.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve\"",
+    "watch2": "concurrently -k -g \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve\"",
     "test": "jest --forceExit",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
@@ -38,6 +40,22 @@
     "url": "https://github.com/cptran777/top-kek-rpg-2/issues"
   },
   "homepage": "https://github.com/cptran777/top-kek-rpg-2#readme",
+  "jest": {
+    "globals": {
+      "__TS_CONFIG__": "tsconfig.json"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testMatch": [
+      "**/test/**/*.test.(ts|js)"
+    ],
+    "testEnvironment": "node"
+  },
   "devDependencies": {
     "@types/async": "^2.0.44",
     "@types/body-parser": "^1.16.5",
@@ -49,6 +67,7 @@
     "@types/lodash": "^4.14.78",
     "@types/node": "^8.0.46",
     "@types/request": "^2.0.6",
+    "concurrently": "^3.5.0",
     "jest": "^21.2.1",
     "node-sass": "^4.5.3",
     "nodemon": "^1.12.1",
