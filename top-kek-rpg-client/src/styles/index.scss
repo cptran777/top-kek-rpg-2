@@ -1,3 +1,4 @@
+/* Styles formerly from App.css */
 .App {
   text-align: center;
 }
@@ -21,4 +22,15 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/* Styles formerly from Index.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+body a {
+  color: blue;
 }
