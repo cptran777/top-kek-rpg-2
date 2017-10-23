@@ -1,3 +1,8 @@
+/**
+ * top-kek-rpg-client/src/actions/index.tsx
+ * Main file that contains the action functions for our redux state
+ */
+
 import * as constants from './constants';
 import * as alias from '../types/alias';
 
