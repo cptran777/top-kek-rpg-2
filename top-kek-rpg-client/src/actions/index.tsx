@@ -8,9 +8,9 @@ import * as alias from '../types/alias';
 
 /******************************* ACTION CREATORS *******************************/
 
-export interface testAction {
+export interface TestAction {
   type: constants.TEST_ACTION;
   data: string | number;
 }
 
-export const testAction: (value: alias.Value) => testAction = (value: alias.Value) => ({ type: constants.TEST_ACTION, data: value });
+export const testAction = (value: alias.Value): TestAction => ({ type: constants.TEST_ACTION, data: value });

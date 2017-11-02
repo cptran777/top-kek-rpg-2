@@ -1,8 +1,14 @@
 import * as React from 'react';
+import * as alias from './types/alias';
+import * as actions from './actions/index';
 
 const logo = require('./logo.svg');
 
-class App extends React.Component {
+interface AppProps {
+  testValue: alias.Value;
+  onTest: (item: alias.Value) => actions.TestAction;
+}
+class App extends React.Component<AppProps, {}> {
   render() {
     return (
       <div className="App">
