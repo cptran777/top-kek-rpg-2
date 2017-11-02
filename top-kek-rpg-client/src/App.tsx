@@ -19,6 +19,9 @@ class App extends React.Component<AppProps, {}> {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <p>
+          {this.props.testValue}  
+        </p>
       </div>
     );
   }
