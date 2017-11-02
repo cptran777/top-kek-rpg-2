@@ -3,10 +3,10 @@
 // npm dependencies
 import * as express from 'express';
 import * as bodyparser from 'body-parser';
-import * as path from 'path';
+import routeHandler from './routes';
 
 // init server application using express
-const app = express();
+export const app = express();
 
 /***************************** INIT CUSTOM MODULES *****************************/
 
@@ -17,16 +17,7 @@ app.use(express.static(__dirname + '/../top-kek-rpg-client/build/'));
 app.use(bodyparser.json());
 
 /********************************* INIT SERVER *********************************/
-
-app.get('/', (req, res) => {
-  console.log('index received');
-  res.sendFile(path.resolve(__dirname + '/../top-kek-rpg-client/build/index.html'));
-});
-
-app.get('/test', (req, res) => {
-  console.log('/test received');
-  res.send('ok');
-});
+routeHandler(app);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
