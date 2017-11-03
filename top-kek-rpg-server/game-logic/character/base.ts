@@ -1,5 +1,6 @@
 export class BaseCharacter {
   hp: number;
+  currentHP: number;
   strength: number;
   defense: number;
   type: string;
@@ -9,6 +10,7 @@ export class BaseCharacter {
     this.name = name;
     this.type = type;
     this.hp = hp;
+    this.currentHP = hp;
     this.strength = strength;
     this.defense = defense;
   }

@@ -75,9 +75,9 @@ export class BasePlayerCharacter extends BaseCharacter {
    * if no instance of the item is found
    * @method removeFromInventory
    * @param item {object} - item should be an object of the type Items
-   * @returns {boolean}
+   * @returns {tuple} - Returns of tuple of type Success
    */
-  removeFromInventory(item: Items): boolean {
+  removeFromInventory(item: Items): Success {
     const inventory = this.inventory;
     const inventorySize = inventory.length;
 
@@ -86,15 +86,41 @@ export class BasePlayerCharacter extends BaseCharacter {
 
       if (inventoryItem.id === item.id) {
         inventory.splice(x, 1);
-        return true;
+        return [true, ''];
       }
     }
 
-    return false;
+    return [false, 'Item not found in inventory'];
   }
 
+  /**
+   * Player character performs an attack. This returns the unmitigated amount of damage that the
+   * player performs and is to be passed to the enemy.
+   */
   attack(): number {
     const weaponPower = this.equipped.weapon.power;
     return BASE_PLAYER_DAMAGE + this.strength + (weaponPower || 0);
+  }
+
+  /**
+   * Player takes the effect of damage minus mitigation, function then returns a boolean for
+   * whether the player is dead or not (HP reaches 0)
+   * @method takeDamage
+   * @param damage {number} - the amount of unmitigated damage to take
+   * @returns {boolean}
+   */
+  takeDamage(damage: number): boolean {
+    // Grab the armor to determine how much mitigation we have against the damage
+    const { head, arm, legs } = this.equipped;
+    const mitigation: number = [head, arm, legs].reduce((total, armor) => {
+      return total + armor.power;
+    }, 0);
+
+    const damageTaken = Math.max(damage - mitigation, 0);
+    const newHP = Math.max(this.currentHP - damageTaken, 0);
+
+    this.currentHP = newHP;
+
+    return newHP === 0;
   }
 }
