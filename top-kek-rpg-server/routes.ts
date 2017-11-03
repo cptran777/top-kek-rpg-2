@@ -1,3 +1,5 @@
+'use strict';
+
 import { app } from './index';
 import * as path from 'path';
 
