@@ -17,3 +17,4 @@ export interface Armor extends Item {
 
 export type Equipment = Weapon | Armor;
 export type Items = Item | Equipment;
+export type Success = [boolean, string];

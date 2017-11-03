@@ -1,7 +1,8 @@
 'use strict';
 
 import { BaseCharacter } from '../base';
-import { Items, Weapon, Armor, Equipment } from '../../types/constants';
+import { Items, Weapon, Armor, Equipment, Success } from '../../types/constants';
+import { BASE_PLAYER_DAMAGE, INVENTORY_LIMIT } from '../constants';
 
 interface EquippedItems {
   head: Armor;
@@ -35,14 +36,20 @@ export class BasePlayerCharacter extends BaseCharacter {
    * inventory
    * @method equipItem
    * @param item {object} - Item should be an object of type Equipment
-   * @returns {undefined}
+   * @returns {tuple} [success, message] - returns a tuple with the success of the equip item action and a
+   *                  message if success is false. Success should be a boolean
    */
-  equipItem(item: Equipment): void {
+  equipItem(item: Equipment): Success {
     const currentEquippedItem = this.equipped[item.position];
-
-    this.equipped[item.position] = item;
     // Adding the old item to inventory so that equipping a new item doesn't just destroy the old one
-    this.addToInventory(currentEquippedItem);
+    const inventorySuccess = this.addToInventory(currentEquippedItem);
+
+    if (inventorySuccess[0]) {
+      this.equipped[item.position] = item;
+      return [true, ''];
+    } else {
+      return inventorySuccess;
+    }
   }
 
   /**
@@ -52,8 +59,15 @@ export class BasePlayerCharacter extends BaseCharacter {
    * @param item {object} - item should be an object of type Items that describes the item
    * @returns {undefined}
    */
-  addToInventory(item: Items): void {
+  addToInventory(item: Items): Success {
+    const inventory = this.inventory;
+
+    if (inventory.length >= INVENTORY_LIMIT) {
+      return [false, 'Inventory is full'];
+    }
+
     this.inventory.push(item);
+    return [true, ''];
   }
 
   /**
@@ -81,6 +95,6 @@ export class BasePlayerCharacter extends BaseCharacter {
 
   attack(): number {
     const weaponPower = this.equipped.weapon.power;
-    return this.strength + (weaponPower || 0);
+    return BASE_PLAYER_DAMAGE + this.strength + (weaponPower || 0);
   }
 }
