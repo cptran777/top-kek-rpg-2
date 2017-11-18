@@ -1,3 +1,5 @@
+import idGenerator from '../util/id-generator';
+
 export class BaseCharacter {
   hp: number;
   currentHP: number;
@@ -5,6 +7,7 @@ export class BaseCharacter {
   defense: number;
   type: string;
   name: string;
+  id: string;
 
   constructor(name: string, type: string, hp: number, strength: number, defense: number) {
     this.name = name;
@@ -13,5 +16,8 @@ export class BaseCharacter {
     this.currentHP = hp;
     this.strength = strength;
     this.defense = defense;
+    this.id = idGenerator.giveId();
+
+    console.log(`ID generated for ${name}: ${this.id}`);
   }
 }

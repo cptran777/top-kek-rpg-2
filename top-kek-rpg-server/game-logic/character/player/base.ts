@@ -114,7 +114,7 @@ export class BasePlayerCharacter extends BaseCharacter {
     const { head, arm, legs } = this.equipped;
     const mitigation: number = [head, arm, legs].reduce((total, armor) => {
       return total + armor.power;
-    }, 0);
+    }, 0) + this.defense;
 
     const damageTaken = Math.max(damage - mitigation, 0);
     const newHP = Math.max(this.currentHP - damageTaken, 0);
